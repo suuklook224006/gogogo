@@ -8,6 +8,10 @@ public class soso {
 		System.out.println("popopo");
 		System.out.println("popopo1");
 		System.out.println("popopo1");
+		System.out.println("popopo1");
+		System.out.println("popopo1");
+		System.out.println("popopo1");
+		System.out.println("popopo1");
 	}
 
 }
