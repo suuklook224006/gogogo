@@ -1,0 +1,44 @@
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+
+<script>
+$(function () {
+  const emailDomains = [
+    "gmail.com", "yahoo.com.tw", "hotmail.com", "outlook.com",
+    "icloud.com", "msn.com", "msa.hinet.net", "pchome.com.tw"
+  ];
+
+  $("#email").autocomplete({
+    minLength: 1,
+    source: function (request, response) {
+      const term = request.term;
+      const atIndex = term.indexOf("@");
+
+      if (atIndex === -1) {
+        // 還沒輸入 @，不顯示建議
+        return response([]);
+      }
+
+      const username = term.slice(0, atIndex);
+      const domainPart = term.slice(atIndex + 1).toLowerCase();
+
+      const filtered = $.map(emailDomains, function (domain) {
+        if (domain.indexOf(domainPart) === 0) {
+          return {
+            label: username + "@" + domain,
+            value: username + "@" + domain
+          };
+        }
+      });
+
+      response(filtered);
+    }
+  });
+
+  // 避免選單點選無效
+  $(document).on("mousedown", ".ui-menu-item", function (e) {
+    e.preventDefault();
+  });
+});
+</script>
