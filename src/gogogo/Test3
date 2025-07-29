@@ -42,3 +42,13 @@ $(function () {
   });
 });
 </script>
+source: function(request, response) {
+  const term = request.term;
+  console.log("輸入內容：", term);
+
+  // 建議值
+  const suggestions = ["abc@gmail.com", "abc@yahoo.com.tw"];
+  console.log("回傳建議：", suggestions);
+
+  response(suggestions.map(v => ({ label: v, value: v })));
+}
